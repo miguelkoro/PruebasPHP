@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Carnet Polideportivo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Formulario para Carnet del Polideportivo</h1>
+    <form action="procesar_formulario.php" method="post" enctype="multipart/form-data">
+        <!-- Nombre -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+
+        <!-- Apellidos -->
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" required>
+        <br><br>
+
+        <!-- Foto -->
+        <label for="foto">Foto:</label>
+        <input type="file" id="foto" name="foto" accept="image/*" required>
+        <br><br>
+
+        <!-- Edad -->
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" min="1" required>
+        <br><br>
+
+        <!-- Deportes -->
+        <label>Deportes:</label><br>
+        <input type="checkbox" id="futbol" name="deportes[]" value="Fútbol">
+        <label for="futbol">Fútbol</label><br>
+        <input type="checkbox" id="natacion" name="deportes[]" value="Natación">
+        <label for="natacion">Natación</label><br>
+        <input type="checkbox" id="baloncesto" name="deportes[]" value="Baloncesto">
+        <label for="baloncesto">Baloncesto</label><br>
+        <input type="checkbox" id="tenis" name="deportes[]" value="Tenis">
+        <label for="tenis">Tenis</label>
+        <br><br>
+
+        <!-- Género -->
+        <label>Género:</label><br>
+        <input type="radio" id="hombre" name="genero" value="Hombre" required>
+        <label for="hombre">Hombre</label><br>
+        <input type="radio" id="mujer" name="genero" value="Mujer" required>
+        <label for="mujer">Mujer</label>
+        <br><br>
+
+        <!-- Botón de envío -->
+        <button type="submit">Enviar</button>
+    </form>
+    <script>
+        // Función para mostrar la preview de la imagen seleccionada
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = ''; // Limpiar cualquier preview anterior
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview de la imagen';
+                    img.style.maxWidth = '100%';
+                    img.style.borderRadius = '8px';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
